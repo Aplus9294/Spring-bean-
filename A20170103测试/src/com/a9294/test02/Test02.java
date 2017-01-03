@@ -13,6 +13,7 @@ import org.junit.Test;
  * @author a9294
  * @version 20170103
  */
+
 public class Test02 {
 	
 	public void combineArray(){

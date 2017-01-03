@@ -17,6 +17,7 @@ import org.junit.Test;
  * @version 20170103
  *
  */
+
 public class Test01 {
 	
 	public void outputMap(){
