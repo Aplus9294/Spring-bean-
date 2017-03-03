@@ -18,14 +18,13 @@ public class CatServlet extends HttpServlet {
 
 	private BaseDAO<Cat> baseDAO = new BaseDAO<Cat>();
 
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doPost(req, resp);
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
@@ -51,8 +50,8 @@ public class CatServlet extends HttpServlet {
 		}
 	}
 
-	protected void initAdd(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void initAdd(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		List<Cat> catList = baseDAO.list(" select c from Cat c ");
 
@@ -61,8 +60,7 @@ public class CatServlet extends HttpServlet {
 		request.getRequestDispatcher("/addCat.jsp").forward(request, response);
 	}
 
-	protected void add(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int motherId = Integer.parseInt(request.getParameter("motherId"));
 		String name = request.getParameter("name");
@@ -82,8 +80,7 @@ public class CatServlet extends HttpServlet {
 		list(request, response);
 	}
 
-	protected void view(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void view(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int id = Integer.parseInt(request.getParameter("id"));
 
@@ -94,16 +91,14 @@ public class CatServlet extends HttpServlet {
 		request.getRequestDispatcher("/viewCat.jsp").forward(request, response);
 	}
 
-	protected void list(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setAttribute("catList", baseDAO.list(" from Cat "));
 
 		request.getRequestDispatcher("/listCat.jsp").forward(request, response);
 	}
 
-	protected void edit(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int id = Integer.parseInt(request.getParameter("id"));
 
@@ -115,8 +110,7 @@ public class CatServlet extends HttpServlet {
 		request.getRequestDispatcher("/addCat.jsp").forward(request, response);
 	}
 
-	protected void save(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void save(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int id = Integer.parseInt(request.getParameter("id"));
 
@@ -151,8 +145,8 @@ public class CatServlet extends HttpServlet {
 		list(request, response);
 	}
 
-	protected void delete(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void delete(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		int id = Integer.parseInt(request.getParameter("id"));
 
@@ -160,12 +154,10 @@ public class CatServlet extends HttpServlet {
 
 		if (cat != null) {
 
-			List<Cat> catList = baseDAO
-					.list(" select c from Cat c where c.mother.id = " + id);
+			List<Cat> catList = baseDAO.list(" select c from Cat c where c.mother.id = " + id);
 
 			if (catList.size() > 0) {
-				request.setAttribute("msg", "无法删除 '" + cat.getName()
-						+ "'。请先删除子Cat。");
+				request.setAttribute("msg", "无法删除 '" + cat.getName() + "'。请先删除子Cat。");
 			} else {
 				baseDAO.delete(cat);
 
